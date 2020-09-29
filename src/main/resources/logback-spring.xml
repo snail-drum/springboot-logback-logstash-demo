@@ -35,7 +35,7 @@
                     <!-- https://logback.qos.ch/manual/layouts.html#logger -->
                     <pattern>
                         {
-                            "type": "runningLog",
+                            "type": "RunningLog",
                             "thread": "%thread",
                             "level": "%level",
                             "logger": "%logger",
@@ -48,7 +48,7 @@
                     <fieldName>stackTrace</fieldName>
                     <throwableConverter class="ch.qos.logback.classic.pattern.ExtendedThrowableProxyConverter" />
                 </stackTrace>
-                <provider class="com.snaildrum.demo.provider.inner.PidJsonProvider" />
+                <provider class="com.snaildrum.demo.provider.running.PidJsonProvider" />
             </providers>
         </encoder>
     </appender>

@@ -1,4 +1,4 @@
-package com.snaildrum.demo.provider.inner;
+package com.snaildrum.demo.provider.running;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.fasterxml.jackson.core.JsonGenerator;

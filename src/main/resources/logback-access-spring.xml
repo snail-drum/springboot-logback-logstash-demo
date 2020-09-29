@@ -22,7 +22,7 @@
                     <!-- https://logback.qos.ch/manual/layouts.html#logback-access -->
                     <pattern>
                         {
-                            "type": "access",
+                            "type": "AccessLog",
                             "executionTime": "%D",
                             "ip": "%a",
                             "httpMethod": "%m",

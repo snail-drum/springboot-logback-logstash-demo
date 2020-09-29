@@ -1,5 +1,6 @@
 # springboot-logback-logstash-demo
-Collect Access Log and Running Log, Support SpringBoot 2.x
+Collect Access Log and Running Log, Support SpringBoot 2.x<br/>
+使用logback收集springboot应用的运行日志和访问日志，并输出到logstash中
 
 ## logstash
 ### 下载安装Logstash
@@ -30,49 +31,62 @@ output {
 ```
 {
         "httpStatus" => "200",
-    "requestMapping" => "/foo/person/{name}",
-              "type" => "access",
-       "requestHost" => "localhost:56529",
-              "port" => 56528,
-        "requestURI" => "/foo/person/zhangsan",
+    "requestMapping" => "/foo/bar",
+     "requestParams" => "{\"name\":\"test\",\"age\":18}",
+              "type" => "AccessLog",
+       "requestHost" => "localhost:52271",
+              "port" => 52267,
+        "requestURI" => "/foo/bar",
           "@version" => "1",
-     "executionTime" => "16",
+     "executionTime" => "140",
                 "ip" => "127.0.0.1",
-        "createTime" => "2020-09-29 10:55:34",
+        "createTime" => "2020-09-29 11:47:08",
               "host" => "localhost",
-        "@timestamp" => 2020-09-29T02:55:34.022Z,
-               "pid" => "31890",
-        "httpMethod" => "GET"
-}
-{
-        "httpStatus" => "200",
-    "requestMapping" => "/foo/upload",
-     "requestParams" => "{\"name\":\"zhangsan\"}",
-              "type" => "access",
-       "requestHost" => "localhost:56529",
-              "port" => 56528,
-        "requestURI" => "/foo/upload",
-          "@version" => "1",
-     "executionTime" => "10",
-                "ip" => "127.0.0.1",
-        "createTime" => "2020-09-29 10:55:33",
-              "host" => "localhost",
-        "@timestamp" => 2020-09-29T02:55:33.925Z,
-               "pid" => "31890",
+        "@timestamp" => 2020-09-29T03:47:08.820Z,
+               "pid" => "42358",
         "httpMethod" => "POST"
 }
 {
          "level" => "INFO",
-          "type" => "runningLog",
-          "port" => 56521,
+          "type" => "RunningLog",
+          "port" => 52254,
+      "@version" => "1",
+        "thread" => "http-nio-auto-1-exec-3",
+    "createTime" => "2020-09-29 11:47:08",
+          "host" => "localhost",
+    "@timestamp" => 2020-09-29T03:47:08.818Z,
+           "pid" => "42358",
+       "message" => "add person Person{name='test', age=18}",
+        "logger" => "com.snaildrum.demo.DemoApplication"
+}
+{
+         "level" => "INFO",
+          "type" => "RunningLog",
+          "port" => 52254,
       "@version" => "1",
         "thread" => "http-nio-auto-1-exec-4",
-    "createTime" => "2020-09-29 10:55:34",
+    "createTime" => "2020-09-29 11:47:08",
           "host" => "localhost",
-    "@timestamp" => 2020-09-29T02:55:34.012Z,
-           "pid" => "31890",
+    "@timestamp" => 2020-09-29T03:47:08.861Z,
+           "pid" => "42358",
        "message" => "query person zhangsan",
         "logger" => "com.snaildrum.demo.DemoApplication"
+}
+{
+        "httpStatus" => "200",
+    "requestMapping" => "/foo/person/{name}",
+              "type" => "AccessLog",
+       "requestHost" => "localhost:52271",
+              "port" => 52267,
+        "requestURI" => "/foo/person/zhangsan",
+          "@version" => "1",
+     "executionTime" => "46",
+                "ip" => "127.0.0.1",
+        "createTime" => "2020-09-29 11:47:08",
+              "host" => "localhost",
+        "@timestamp" => 2020-09-29T03:47:08.891Z,
+               "pid" => "42358",
+        "httpMethod" => "GET"
 }
 
 
