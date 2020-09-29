@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- logstash tcp  -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <!-- url prefixes filter split by , -->
+        <filter class="com.snaildrum.demo.filter.access.UrlPrefixesFilter">
+            <prefixes>/foo</prefixes>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <param name="Encoding" value="UTF-8"/>
+        <destination>localhost:4560</destination>
+        <keepAliveDuration>5 minutes</keepAliveDuration>
+        <reconnectionDelay>1 second</reconnectionDelay>
+        <writeBufferSize>16384</writeBufferSize>
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <version/>
+                <pattern>
+                    <!-- https://logback.qos.ch/manual/layouts.html#logback-access -->
+                    <pattern>
+                        {
+                            "type": "access",
+                            "executionTime": "%D",
+                            "ip": "%a",
+                            "httpMethod": "%m",
+                            "requestHost": "%i{host}",
+                            "requestMapping": "%reqAttribute{org.springframework.web.servlet.HandlerMapping.bestMatchingPattern}",
+                            "createTime": "%date{yyyy-MM-dd HH:mm:ss}",
+                            "requestURI": "%U",
+                            "httpStatus": "%s"
+                        }
+                    </pattern>
+                </pattern>
+                <provider class="com.snaildrum.demo.provider.access.PidJsonProvider" />
+                <provider class="com.snaildrum.demo.provider.access.RequestParamsJsonProvider" />
+            </providers>
+        </encoder>
+    </appender>
+
+<!--
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%fullRequest%n%n%fullResponse</pattern>
+        </encoder>
+    </appender>
+-->
+
+
+    <appender-ref ref="LOGSTASH"/>
+<!--    <appender-ref ref="CONSOLE" />-->
+</configuration>
