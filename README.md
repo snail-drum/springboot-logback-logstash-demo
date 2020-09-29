@@ -78,5 +78,10 @@ output {
 
 ```
 
+## 参考
+
+- [logback-access-spring-boot-starter](https://github.com/akihyro/logback-access-spring-boot-starter)
+- [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder)
+- [logback-access](http://logback.qos.ch/access.html)
 
 
